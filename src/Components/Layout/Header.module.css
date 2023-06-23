@@ -20,11 +20,24 @@
     z-index: 0;
     overflow: hidden;
   }
-  
   .mainimage img {
     width: 110%;
     height: 500%;
     object-fit: cover;
     transform: rotateZ(-4deg) translateY(-4rem) translateX(-1rem);
+  }
+  @media (max-width: 500px) {
+ 
+    .header{
+      color: white;
+      font-size:xx-small;
+      font-family: sans-serif ;
+
+    }
+
+    .mainimage img{
+      width:120%;
+      height:500%
+    }
   }
   

@@ -18,3 +18,13 @@
     margin-top: 0;
     color: rgb(179, 42, 8);
   }
+  @media (max-width: 500px) {
+.summary{
+  font-size: 10px;
+}
+.summary h2{
+  font-size: 15px;
+}
+
+
+  }
