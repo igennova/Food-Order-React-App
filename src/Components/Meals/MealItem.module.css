@@ -1,8 +1,8 @@
 .meal {
     display: flex;
     justify-content: space-between;
-    margin: 1rem;
-    padding-bottom: 1rem;
+    margin: 3rem;
+    padding-bottom: 2rem;
     border-bottom: 1px solid #ccc;
   }
   
@@ -10,7 +10,7 @@
     margin: 0 0 0.25rem 0;
   }
   
-  .description {
+  .desc{
     font-style: italic;
   }
   
