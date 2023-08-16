@@ -4,7 +4,7 @@ import b from "./MealItem.module.css"
 import MealItemForm from "./MealItemForm";
 const MealItem=(props)=>{
       const cartctx= useContext(CartContext)
-    const price=`$${props.price.toFixed(2)}`
+    // const price=`$${props.price.toFixed(2)}`
 
     const AddtoCarthandler=(amount)=>{
         return(
@@ -32,7 +32,7 @@ const MealItem=(props)=>{
             <div className={b.desc}> {props.desc}
                 
             </div>
-            <div className={b.price}>{price}</div>
+            <div className={b.price}>{props.price}</div>
         </div>
         <div>
             <MealItemForm id={props.id} onAddtocart={AddtoCarthandler}/>

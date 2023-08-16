@@ -3,13 +3,26 @@ import CartContext from "../../Store/Cart-Context";
 import classes from './Cart.module.css';
 import Modal from "../UI/Modal";
 import CartItem from "./CartItem";
+import Checkout from "./Checkout";
 
 const Cart = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
+  const[form,setform]=useState(false)
 
   const handleClick = () => {
-    setErrorMessage('Sorry, we are facing an error.');
+    setform(true)
+    
   };
+  const submithandler=(userData)=>{
+    fetch("https://react-https-a1940-default-rtdb.firebaseio.com/orders.json",{
+      method:"POST",
+      body:JSON.stringify({
+        user:userData,
+        orderedItems:cartctx.items
+      })
+    })
+
+  }
   const cartctx=useContext(CartContext)
   const totalAmount=`$${cartctx.totalAmount.toFixed(2)}`
   const hasitem=cartctx.items.length>0
@@ -40,6 +53,8 @@ const Cart = (props) => {
         { hasitem &&<button className={classes.button} onClick={handleClick}>Order</button>}
         {errorMessage && <p>{errorMessage}</p>}
       </div>
+      {form && <Checkout onConfirm={submithandler}  onCancel={props.onHide}/>}
+     
       </Modal> 
       
   );
