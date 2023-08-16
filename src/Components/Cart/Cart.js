@@ -8,19 +8,27 @@ import Checkout from "./Checkout";
 const Cart = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
   const[form,setform]=useState(false)
+  const[isSumbit,setissubmit]=useState(false)
+  const[didissubmit,setdidsubmit]=useState(false)
+
 
   const handleClick = () => {
     setform(true)
     
   };
-  const submithandler=(userData)=>{
-    fetch("https://react-https-a1940-default-rtdb.firebaseio.com/orders.json",{
+  const submithandler=async (userData)=>{
+    setissubmit(true)
+     await fetch("https://react-https-a1940-default-rtdb.firebaseio.com/orders.json",{
       method:"POST",
       body:JSON.stringify({
         user:userData,
         orderedItems:cartctx.items
       })
+    
     })
+    setissubmit(false)
+    setdidsubmit(true)
+    cartctx.clearcart()
 
   }
   const cartctx=useContext(CartContext)
@@ -39,11 +47,8 @@ const Cart = (props) => {
       ))}
     </ul>
   );
-
-  return (
-    <Modal onHide={props.onHide}>
-    
-      {cartItems}
+const cartmodalcontent=<Fragment>
+  {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
         <span>{totalAmount}</span>
@@ -55,6 +60,16 @@ const Cart = (props) => {
       </div>
       {form && <Checkout onConfirm={submithandler}  onCancel={props.onHide}/>}
      
+</Fragment>
+const whensubmitting=<p>Sending order data......</p>
+const whendone= <p> Order Sucessfull !!!</p>
+  return (
+    <Modal onHide={props.onHide}>
+      {!isSumbit && !didissubmit && cartmodalcontent}
+      {isSumbit&& whensubmitting}
+      {!isSumbit&&didissubmit && whendone}
+    
+      
       </Modal> 
       
   );

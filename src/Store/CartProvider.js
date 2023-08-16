@@ -65,6 +65,10 @@ const CartReducer=(state,action)=>{
 
 
     }
+    if(action.type==="CLEAR"){
+        return defauCart
+    }
+    
     return(
         defauCart
     )
@@ -85,12 +89,18 @@ const CartProvider=props=>{
             id:id
         })
     }
+    const clearcart=()=>{
+        dispCartfn({
+            type:"CLEAR"
+        })
+    }
 
     const cartcon={
         items:cartState.items,
         totalAmount:cartState.totalAmount,
         addItem:addItem,
         deleteItem:deleteItem,
+        clearcart:clearcart
 
     }
     return(
